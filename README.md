@@ -66,17 +66,20 @@ python ensemble.py
 ## attack your custom yolov4 model
 1、 modify yolov4_helper.py
     #model path
-    class Helper():
+ ``` python
+   class Helper():
        def __init__(self):
        # cfgfile = "models/yolov4.cfg"
        # weightfile = "models/yolov4.weights"
        cfgfile = "models/custom.cfg"
        weightfile = "models/custom.weights"
-
+  ```
        #class number
-       item = item.reshape(-1, 5+16, h*w).permute(1,0,2).reshape(5+16, -1)
-
+ ```python
+      item = item.reshape(-1, 5+16, h*w).permute(1,0,2).reshape(5+16, -1)
+ ```
 2. update the class number  and anchor numbers according to your model's  config file
+  ```python
        #    anchors = [12, 16, 19, 36, 40, 28, 36, 75, 76, 55, 72, 146, 142, 110, 192, 243, 459, 401]
        #    num_anchors = 9
        #    anchor_masks = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
@@ -85,8 +88,10 @@ python ensemble.py
        num_anchors = 12
        anchor_masks = [[0,1,2,3],[4,5,6,7],[8,9,10,11]]
        strides = [8,16,32]
-
+  ```
 3. run attack
+   ```bash
        python attackyolo.py --patch_type grid --lines 3 --box_scale 1.0
 
        python attackyolo.py --patch_type astroid
+    ```
