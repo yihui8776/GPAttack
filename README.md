@@ -79,6 +79,7 @@ python ensemble.py
       item = item.reshape(-1, 5+16, h*w).permute(1,0,2).reshape(5+16, -1)
  ```
 2. update the class number  and anchor numbers according to your model's  config file
+  do_detect()  in  utils/utils.py
   ```python
        #    anchors = [12, 16, 19, 36, 40, 28, 36, 75, 76, 55, 72, 146, 142, 110, 192, 243, 459, 401]
        #    num_anchors = 9
@@ -88,6 +89,8 @@ python ensemble.py
        num_anchors = 12
        anchor_masks = [[0,1,2,3],[4,5,6,7],[8,9,10,11]]
        strides = [8,16,32]
+       #class number is 16
+       boxes.append(get_region_boxes1(list_boxes[i].data.cpu().numpy(), conf_thresh, 16, masked_anchors, len(anchor_masks[i])))
   ```
 3. run attack
    ```bash
